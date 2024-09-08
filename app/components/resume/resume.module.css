@@ -1,0 +1,291 @@
+.container{
+    min-height: 1000px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--primary);
+}
+
+.resume{
+    display: flex;
+    min-height: 770px;
+}
+
+.leftSection{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 60px;
+}
+
+.starRed{
+    position: absolute;
+    width: 75px;
+    height: auto;
+    left: 30px;
+    top: 70px;
+}
+
+.headingName{
+    color: var(--primary);
+    font-family: var(--font-righteous);
+    font-size: 4.5em;
+    padding-left: 125px;
+}
+
+.paragraph{
+    padding-left: 125px;
+    font-size: 1.25em;
+    font-family: var(--font-urbanist);
+    font-weight: 800;
+}
+
+.rightSection{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding-top: 60px;
+    align-items: center;
+}
+
+.linkedButton{
+    margin-left: 125px;
+    padding: 8px 0px 8px 0px;
+    margin-top: 30px;
+    border-style: none;
+    background-color: var(--tertiary);
+    color: var(--primary);
+    font-size: 1.25em;
+    width: calc(100% - 125px);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.headingM{
+    font-size: 1.75em;
+    font-family: var(--font-righteous);
+    padding-left: 125px;
+    padding-top: 25px;
+    letter-spacing: 2px;
+}
+.spacer{
+    margin-left: 125px;
+    margin-top: 25px;
+}
+.headingS{
+    font-size: 1.25em;
+    font-family: var(--font-righteous);
+}
+
+.skillsBar{
+    display: flex;
+    color: var(--background);
+    background-color: var(--primary);
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 12px 12px 0px 0px;
+    padding: 5px 20px 5px 20px;
+}
+
+.displayButton{
+    border-style: none;
+    background-color: var(--secondary);
+    font-family: var(--font-urbanist);
+    font-weight: 700;
+    height: 25px;
+    width: 75px;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+.bullets{
+    margin-left: 125px;
+    padding-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border: 1px solid var(--primary);
+    border-radius: 0px 0px 12px 12px;
+}
+.bulletW{
+    background-color: var(--primary);
+    color: var(--background);
+    width: 120px;
+    padding: 6px 10px 6px 10px;
+    margin: 7px 15px 7px 15px;
+    text-align: center;
+    border-radius: 50px;
+    font-family: var(--font-urbanist);
+}
+.education .headingM{
+    margin-bottom: 20px;
+}
+
+.educationStrip{
+    display: flex;
+    margin: 0px 0px 0px 0px;
+    align-items: center;
+}
+
+.star{
+    width: 50px;
+    height: auto;
+}
+
+.year{
+    font-family: var(--font-urbanist);
+    font-weight: 700;
+    font-size: 1.35em;
+    width: 150px;
+    text-align: center;
+}
+
+.eduHeading{
+    font-family: var(--font-urbanist);
+    font-weight: 800;
+    font-size: 1.25em;
+}
+
+.eduSubHeading{
+    font-family: var(--font-urbanist);
+    font-weight: 200;
+    font-size: 1.25em
+}
+.downArrow{
+    width:10px;
+    height: auto;
+    margin-left: 120px;
+}
+.arrow:last-child{
+    display: none;
+}
+.experience{
+    color: #000;
+    background-color: var(--primary);
+    padding: 10px;
+    margin-top: 100px;
+    border-radius: 10px;
+    width: 450px;
+    position: relative;
+}
+
+.experience .headingM{
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+.resumeImage{
+    width: 300px;
+    height: auto;
+    position: absolute;
+    z-index: -1;
+    top: -75px;
+    left: -50px
+}
+.softSkills{
+    display: flex;
+    width: 1200px;
+    justify-content: space-evenly;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.bulletY{
+    background-color: var(--secondary);
+    color: var(--background);
+    min-width: 150px;
+    padding: 6px 10px 6px 10px;
+    margin: 7px 15px 7px 15px;
+    text-align: center;
+    border-radius: 50px;
+    font-family: var(--font-urbanist);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .star {
+      animation: spin 3s infinite linear;
+    }
+    @keyframes spin {
+      to {
+        rotate: 360deg;
+      }
+    }
+  }
+
+@media (max-width: 600px) {
+    .container{
+        width: 100%;
+        height: auto;
+    }
+    .resume{
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+    .paragraph{
+        padding-left: 0px;
+    }
+    .linkedButton{
+        margin-left: 0px;
+        width: 100%;
+    }
+    .spacer{
+        margin-left: 0px;
+        margin-top: 25px;
+    }
+    .bullets{
+        margin-left: 0px;
+    }
+    .headingM{
+        padding-left: 0px;
+    }
+    .headingName{
+        font-size: 3em;
+    }
+    .starRed{
+        left: 0px;
+    }
+    .leftSection{
+        width: 90vw;
+    }
+    .rightSection{
+        width: 90vw;
+    }
+    .arrow{
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+    .downArrow{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .star{
+        width: 30px;
+    }
+    .year{
+        width: 110px;
+        font-size: 1.2em;
+    }
+    .educationStrip{
+        padding: 1px;
+        border: 1px solid var(--primary);
+        border-radius: 10px;
+    }
+    .resumeImage{
+        top: -75px;
+        left: 30px;
+    }
+    .experience{
+        width: 90vw;
+    }
+    .softSkills{
+        width: 90vw;
+        padding-bottom: 50px;
+    }
+    .bulletY{
+        width: 100%;
+    }
+}

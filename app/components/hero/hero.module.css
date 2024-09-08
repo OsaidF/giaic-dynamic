@@ -1,0 +1,148 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90vh;
+    min-height: 800px;    
+}
+
+.hero{
+    width: 80vw;
+    max-width: 1200px;
+    height: 80vh;
+    min-height: 600px;
+    display: flex;
+}
+.leftSection{
+    width: 600px;
+    display: flex;
+    align-self: center;
+    justify-content: flex-end;
+}
+
+
+.heroImg{
+    position: absolute;
+    right: 10px;
+    width: 450px;
+    height: auto;
+}
+
+.img{
+    width: 500px;
+    height: 425px;
+    position: relative;
+}
+
+.star{
+    position: absolute;
+    width: 75px;
+    height: auto;
+    left: -50px;
+}
+
+.info{
+    color: #000;
+    width: auto;
+    height: 175px;
+    padding: 5px;
+    background-color: var(--primary);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.infoLine{
+    display: flex;
+    align-items: center;
+}
+
+.infoIcons{
+    width: 35px;
+    height: auto;
+}
+
+.infoHeading{
+    padding-left: 25px;
+    font-family: var(--font-urbanist);
+    font-size: 1.35em;
+}
+
+
+.rightSection{
+    width: 50vw;
+    width: 600px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+}
+
+.circle{
+    background-color: var(--primary);
+    width: 370px;
+    height: 370px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+
+.largeHeading{
+    font-family: var(--font-righteous);
+    color: var(--primary);
+    font-size: 10em;
+    align-self: flex-start;
+    text-wrap: nowrap;
+    overflow-x: hidden;
+}
+.circleImage{
+    width: auto;
+    height: 370px;
+}
+
+@media (max-width: 600px) {
+    .container{
+        height: auto;
+    }
+    .hero{
+        flex-direction: column;
+        width: 90vw;
+    }
+    .leftSection{
+        padding-top: 40px;
+        width: 90vw;
+        align-items: center;
+    }
+    .rightSection{
+        width: 90vw;
+    }
+    .heroImg{
+        height: auto;
+        width: 65vw;
+    }
+    .star{
+        left: 0px;
+    }
+    .info{
+        height: 175px;
+        padding: 5px;
+        background-color: var(--primary);
+        position: absolute;
+        bottom: 100px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+    .circle{
+        width: 350px;
+        height: 350px
+    }
+    .largeHeading{
+        margin-top: 200px;
+        font-size: 3em;
+    }
+}
