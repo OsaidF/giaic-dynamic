@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './navbar.module.css'
 import { motion } from "framer-motion";
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 interface modal {
   onRequestClose: () => void
@@ -96,13 +97,15 @@ const Navbar = () => {
             whileInView={"visible"}
             viewport={{ once: true}}
             className={styles.links}>
+                <Link href="#first-section">
                 <motion.h4 
                 variants={item}
                 className={styles.link}>About Me</motion.h4>
+                </Link>
+                <Link href="#first-section">
                 <motion.h4 
                 variants={item} className={styles.link}>Resume</motion.h4>
-                <motion.h4 
-                variants={item} className={styles.link}>Works</motion.h4>
+                </Link>
                 <motion.button 
                 variants={item}
                 whileHover={{ scale: 1.1 }}

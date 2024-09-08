@@ -74,6 +74,7 @@ const Accordion: React.FC<accoridionType> = ({ i, expanded, setExpanded, bullets
             className={styles.bullets}>
            {bullets.map((i) => (
               <motion.h4
+              key={i}
               variants={item}
               className={styles.bulletW}>{i}</motion.h4>
             ))}

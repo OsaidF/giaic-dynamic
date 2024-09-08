@@ -113,7 +113,7 @@ const Resume = () => {
 
   const [expanded, setExpanded] = useState(true);
   return (
-    <div className={styles.container}>
+    <div className={styles.container} id="first-section">
       <div className={styles.resume}>
         <div className={styles.leftSection}>
           <Image
