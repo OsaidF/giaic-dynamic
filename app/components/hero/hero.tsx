@@ -1,20 +1,17 @@
 'use client'
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './hero.module.css'
 import Image from 'next/image';
 import heroImg from '../../public/images/hero/portfolio.png';
 import star from '../../public/images/star.png';
-import location from '../../public/images/hero/location.png';
+import locationImg from '../../public/images/hero/location.png';
 import envelope from '../../public/images/hero/envelope.png';
-import phone from '../../public/images/hero/phone.png';
+import phoneImg from '../../public/images/hero/phone.png';
 import face from '../../public/images/hero/sideprofile.png'
-import { motion } from 'framer-motion'
+import edit from '../../public/images/edit.png'
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
-let locationAdd = 'Paris, France'
-let email = 'Alexferguson@outlook.com'
-let phoneNo = '01 348 501 2699'
-let circularMessage = 'Front-end developer •  Back-end Developer  • UI/UX •  Web Designer  • '
-let jobTitle = 'Web Developer'
 let faceImg = face
 
 interface TextRingProps {
@@ -44,6 +41,26 @@ const TextRing: React.FC<TextRingProps> = ({ children, side }) => {
 };
 
 const Hero = () => {
+  const [locationAdd, setLocationadd] = useState<string>('Paris, France');
+  const [email, setEmail] = useState<string>('Alexferguson@outlook.com');
+  const [phoneNo, setPhoneNo] = useState<string>('01 348 501 2699');
+  const [circularMessage, setcircularMessage] = useState<string>('Front-end developer •  Back-end Developer  • UI/UX •  Web Designer  • ');
+  const [jobTitle, setJobTitle] = useState<string>('Web Developer');
+  
+
+  useEffect(() => {
+    const location = localStorage.getItem('location')!
+    setLocationadd(location)
+    const email = localStorage.getItem('email')!
+    setEmail(email)
+    const phone = localStorage.getItem('phone')!
+    setPhoneNo(phone)
+    const circTxt = localStorage.getItem('circle')!
+    setcircularMessage(circTxt)
+    const job = localStorage.getItem('job')!
+    setJobTitle(job)
+  })
+
 
   const item = {
     hidden: { y: 20, opacity: 0 },
@@ -77,7 +94,7 @@ const Hero = () => {
           <Image src={heroImg} alt='hero image' className={styles.heroImg} priority />
           <div className={styles.info}>
               <span className={styles.infoLine}>
-                <Image src={location} alt='location' className={styles.infoIcons} />
+                <Image src={locationImg} alt='location' className={styles.infoIcons} />
                 <h4 className={styles.infoHeading}>{locationAdd}</h4>
               </span>
               <span className={styles.infoLine}>
@@ -85,7 +102,7 @@ const Hero = () => {
                 <h4 className={styles.infoHeading}>{email}</h4>
               </span>
               <span className={styles.infoLine}>
-                <Image src={phone} alt='location' className={styles.infoIcons} />
+                <Image src={phoneImg} alt='location' className={styles.infoIcons} />
                 <h4 className={styles.infoHeading}>{phoneNo}</h4>
               </span>
           </div>

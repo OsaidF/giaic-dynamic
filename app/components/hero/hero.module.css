@@ -79,6 +79,7 @@
     display: flex;
     align-self: center;
     justify-content: center;
+    position: relative;
 }
 
 .circle{
@@ -102,7 +103,13 @@
     width: auto;
     height: 370px;
 }
-
+.edit{
+    position: absolute;
+    width: 30px;
+    top: 0;
+    right: 0;
+    height: auto;
+}
 @media (max-width: 600px) {
     .container{
         height: auto;

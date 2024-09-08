@@ -1,17 +1,13 @@
-import Footer from "./components/footer/footer";
-import Hero from "./components/hero/hero";
-import Navbar from "./components/navbar/navbar";
-import Resume from "./components/resume/resume";
+'use client';
+import FormResume from "./components/form/form";
 import styles from "./page.module.css";
 
-export default function Home() {
 
+export default function Home() {
+    
   return (
     <div>
-      <Navbar />
-      <Hero />
-      <Resume />
-      <Footer />
+      <FormResume />
     </div>
   );
 }

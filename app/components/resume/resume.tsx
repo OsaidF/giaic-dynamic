@@ -6,43 +6,10 @@ import star from "../../public/images/resume/starY.png";
 import arrow from "../../public/images/resume/arrow-down.png";
 import resume from "../../public/images/resume/resume.png";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Accordion from "./accordion";
 import { motion } from "framer-motion";
 
-let softwareTools = ["Photoshop", "Illustrator", "VSCode", "React", "NextJs"];
-let programming = ["HTML", "CSS", "JavaScript", "TypeScript"];
-let softSkills = [
-  "Web Design",
-  "UI/UX",
-  "Creative",
-  "Detail-Oriented",
-  "Hardworking",
-];
-let name = "Alex";
-let paragraph =
-  "I'm a self-taught Graphic Designer and Programmer based in USA with extensive front-end and back-end knowledge. I am currently living in France and pusuing a degree in Web and Digital Project Management.";
-let link = "https://www.linkedin.com";
-let education = [
-  {
-    id: 1,
-    year: "2015-2019",
-    heading: "Iowa State university",
-    subHeading: "Bachelor in CS",
-  },
-  {
-    id: 2,
-    year: "2020-2021",
-    heading: "Alphabet, Google",
-    subHeading: "Degree in cloud computing",
-  },
-  {
-    id: 2,
-    year: "2021-2022",
-    heading: "Alphabet, Google",
-    subHeading: "Degree in AI technologies",
-  },
-];
 let experience = [
   {
     id: 1,
@@ -59,6 +26,58 @@ let experience = [
 ];
 
 const Resume = () => {
+
+  interface educationType {
+    year: string,
+    heading: string,
+    subHeading: string,
+  }
+  interface experienceType {
+    year: string,
+    heading: string,
+    subHeading: string,
+  }
+
+  const [name, setName] = useState<string>("Alex")
+  const [paragraph, setParagraph] = useState<string>("I'm a self-taught Graphic Designer and Programmer based in USA with extensive front-end and back-end knowledge. I am currently living in France and pusuing a degree in Web and Digital Project Management.")
+  const [link, setLink] = useState<string>("https://www.linkedin.com")
+  const [softwareTools, setSoftwareTools] = useState<string[]>(["Photoshop", "Illustrator", "VSCode", "React", "NextJs"])
+  const [programming, setProgramming] = useState<string[]>(["HTML", "CSS", "JavaScript", "TypeScript"])
+  const [softSkills, setSoftskills ] = useState<string[]>(["Web Design","UI/UX","Creative","Detail-Oriented","Hardworking",])
+  const [education, setEducation ] = useState<educationType[]>([{year:'', heading: '', subHeading: ''}])
+  const [experience, setExperience ] = useState<experienceType[]>([{year:'', heading: '', subHeading: ''}])
+  console.log(education)
+
+  useEffect(() => {
+    const software = localStorage.getItem('software')!
+    const value = JSON.parse(software)
+    setSoftwareTools(value)
+
+    const programming = localStorage.getItem('programming')!
+    const prvalue = JSON.parse(programming)
+    setProgramming(prvalue)
+
+    const education = localStorage.getItem('education')!
+    const edvalue = JSON.parse(education)
+    setEducation(edvalue)
+
+    const experience = localStorage.getItem('experience')!
+    const expvalue = JSON.parse(experience)
+    setExperience(expvalue)
+
+    const softskills = localStorage.getItem('softSkills')!
+    const sfvalue = JSON.parse(softskills)
+    setSoftskills(sfvalue)
+
+    const name = localStorage.getItem('name')!
+    setName(name)
+
+    const paragraph = localStorage.getItem('paragraph')!
+    setParagraph(paragraph)
+
+    const link = localStorage.getItem('link')!
+    setLink(link)
+  })
     {/* Stagger children animation */}
     const container = {
         hidden: { opacity: 1, scale: 1 },
@@ -214,7 +233,7 @@ const Resume = () => {
           className={styles.experience}>
             <h5 className={styles.headingM}>Experience</h5>
             <Image src={resume} alt="resume" className={styles.resumeImage} />
-            {experience.map((i) => (
+            { experience.map((i) => (
               <>
                 <div className={styles.educationStrip}>
                   <Image src={star} alt="star" className={styles.star} />
