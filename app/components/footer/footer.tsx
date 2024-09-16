@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './footer.module.css';
 import Image from 'next/image';
 import star from '../../public/images/resume/starY.png'
-import Edit from '../edit/edit1';
 
 const Footer = () => {
   return (
