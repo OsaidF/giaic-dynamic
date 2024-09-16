@@ -51,6 +51,8 @@ const Modal: React.FC<modal> = ({ onRequestClose }) => {
 
 const Navbar = () => {
   const [isModalOpen, setModalIsOpen] = useState(false);
+
+  
 	const toggleModal = () => {
 		setModalIsOpen(!isModalOpen);
 	};

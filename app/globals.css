@@ -12,6 +12,16 @@ body {
   overflow-x: hidden;
 }
 
+#__next {
+  height: 100vh;
+  display: grid;
+}
+
+.downloadBtn {
+  position: absolute;
+  top: 0;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
@@ -48,6 +58,25 @@ a {
     translate(-50%, -50%)
     rotate(calc(360deg / var(--total) * var(--index)))
     translateY(calc(var(--radius, 5) * -1ch));
+}
+
+.button-container{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+.download-button{
+  background-color: var(--secondary);
+  font-family: var(--font-urbanist);
+  font-weight: 800;
+  font-size: 1em;
+  border-radius: 20px;
+  border: none;
+  color: var(--background);
+  width: auto;
+  margin: 0px;
+  padding: 5px 30px 5px 30px;
+  cursor: pointer;
 }
 
 

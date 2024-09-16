@@ -9,11 +9,16 @@ import envelope from '../../public/images/hero/envelope.png';
 import phoneImg from '../../public/images/hero/phone.png';
 import face from '../../public/images/hero/sideprofile.png'
 import edit from '../../public/images/edit.png'
-import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Formik, Field, Form, ErrorMessage, } from "formik";
+import * as Yup from 'yup';
 
-let faceImg = face
+// GET IMAGE FROM LOCAL STORAGE
+const myImage = localStorage.getItem("profile-img");
+let faceImg = myImage ? myImage : face
 
+
+// TEXT RING
 interface TextRingProps {
   children: string;
   side: number;
@@ -40,13 +45,57 @@ const TextRing: React.FC<TextRingProps> = ({ children, side }) => {
   );
 };
 
+
+// SCHEMA FOR SMALL FORM
+const FormSchema = Yup.object().shape({
+  location: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  email: Yup.string().email('Invalid email').required('Required'),
+  phone: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+  paragraph: Yup.string()
+    .min(2, 'Too Short!')
+    .max(1000, 'Too Long!')
+    .required('Required'),
+    circle: Yup.string()
+    .min(2, 'Too Short!')
+    .max(150, 'Too Long!')
+    .required('Required'),
+    job: Yup.string()
+    .min(2, 'Too Short!')
+    .max(50, 'Too Long!')
+    .required('Required'),
+})
+
+// INITIAL VALUES FOR SMALL FORM
+const initialValues = {
+  circle: "Front-end developer  •  Back-end Developer  •  UI/UX •  Web Designer  •  ",
+  job:  "Web Developer",
+  location: "Paris, France",
+  email: "Alexferguson@outlook.com",
+  phone: "01 348 501 2699",
+};
+
+
+
 const Hero = () => {
   const [locationAdd, setLocationadd] = useState<string>('Paris, France');
   const [email, setEmail] = useState<string>('Alexferguson@outlook.com');
   const [phoneNo, setPhoneNo] = useState<string>('01 348 501 2699');
   const [circularMessage, setcircularMessage] = useState<string>('Front-end developer •  Back-end Developer  • UI/UX •  Web Designer  • ');
   const [jobTitle, setJobTitle] = useState<string>('Web Developer');
-  
+
+  const [isOpen, setIsOpen] = useState(true);
+
+  const [, forceRender] = useState(false);
+
+  const handleClick = () => {
+    forceRender((prev) => !prev);
+  };
 
   useEffect(() => {
     const location = localStorage.getItem('location')!
@@ -62,32 +111,10 @@ const Hero = () => {
   })
 
 
-  const item = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
-    },
-  };
-
-  const item2 = {
-    hidden: { x: -100, opacity: 0 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { type: "spring", stiffness: 300, damping: 24 },
-    },
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.hero}>
-      <motion.div
-      variants={item2}
-      initial={"hidden"}
-      whileInView={"visible"}
-      viewport={{once: true}}
+      <div
       className={styles.leftSection}>
         <div className={styles.img}>
           <Image src={star} alt='star' className={styles.star} />
@@ -107,30 +134,124 @@ const Hero = () => {
               </span>
           </div>
         </div>
-      </motion.div>
+      </div>
       <div className={styles.rightSection}>
+        <Image src={edit} alt='edit' className={styles.edit}  onClick={() => setIsOpen(!isOpen)} />
+        
+        {/* OPENS AND CLOSES FORM TO UPDATE */}
+        <div style={{ display: isOpen ? "block" : "none" }}>
+
+
+        <div className={styles.form}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={FormSchema}
+        onSubmit={async (values) => {
+          localStorage.setItem('location', values.location)
+          localStorage.setItem('email', values.email)
+          localStorage.setItem('phone', values.phone)
+          localStorage.setItem('circle', values.circle)
+          localStorage.setItem('job', values.job)
+        }}
+      >
+        {({ values }) => (
+          <Form>
+
+            <div className={styles.col}>
+              <label htmlFor="location">Address</label>
+              <Field
+                name='location'
+                placeholder="eg: Karachi, Pakistan"
+                type="text"
+              />
+              <ErrorMessage
+                name='location'
+                component="div"
+                className="field-error"
+              />
+            </div>
+
+            <div className={styles.col}>
+              <label htmlFor="phone">Phone Number</label>
+              <Field
+                name='phone'
+                placeholder="example: +92 348 501 2431"
+                type="text"
+              />
+              <ErrorMessage
+                name='phone'
+                component="div"
+                className="field-error"
+              />
+            </div>
+
+            <div className={styles.col}>
+              <label htmlFor="email">Email</label>
+              <Field
+                name='email'
+                placeholder="example: name@acme.com"
+                type="text"
+              />
+              <ErrorMessage
+                name='email'
+                component="div"
+                className="field-error"
+              />
+            </div>
+
+
+            <div className={styles.col}>
+              <label htmlFor="circle">Circle Text</label>
+              <Field
+                name='circle'
+                placeholder="eg: Front-end developer •  Back-end Developer  • UI/UX •  Web Designer  • "
+                type="text"
+              />
+              <ErrorMessage
+                name='circle'
+                component="div"
+                className="field-error"
+              />
+            </div>
+
+            
+            <div className={styles.col}>
+              <label htmlFor="job">Your Job Title</label>
+              <Field
+                name='job'
+                placeholder="eg: Web Developer "
+                type="text"
+              />
+              <ErrorMessage
+                name='job'
+                component="div"
+                className="field-error"
+              />
+            </div>
+            Click Submit twice to update values
+            <button type="submit" className={styles.submit} onClick={() => handleClick()}>Submit</button>
+          </Form>
+        )}
+      </Formik>
+
+
+
+    </div>
+        </div>
           <TextRing side={1}>
             {circularMessage}
           </TextRing>
-          <motion.div 
-          variants={item}
-          initial={"hidden"}
-          whileInView={"visible"}
-          viewport={{ once: true}}
+          <div 
           className={styles.circle}>
-            <Image src={faceImg} alt='face' className={styles.circleImage} />
-          </motion.div>
+            <Image src={faceImg} alt='face' width={370} height={370} className={styles.circleImage} />
+          </div>
       </div>
       
       </div>
-      <motion.div 
-      variants={item}
-      initial={"hidden"}
-      whileInView={"visible"}
-      viewport={{ once: true}}
+      <div 
       className={styles.largeText}>
         <h1 className={styles.largeHeading}>{jobTitle}</h1>
-      </motion.div>
+      </div>
     </div>
   )
 }

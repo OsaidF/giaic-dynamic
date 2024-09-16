@@ -1,124 +1,47 @@
 "use client";
 import React from "react";
-import styles from './form.module.css'
+import styles from './edit.module.css'
 import { Formik, Field, Form, ErrorMessage, FieldArray } from "formik";
 import Image from "next/image";
 import close from '../../public/images/close.png'
 import { useRouter } from "next/navigation";
-import * as Yup from 'yup';
-
-
-const FormSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  location: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  email: Yup.string().email('Invalid email').required('Required'),
-  phone: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-  paragraph: Yup.string()
-    .min(2, 'Too Short!')
-    .max(1000, 'Too Long!')
-    .required('Required'),
-    circle: Yup.string()
-    .min(2, 'Too Short!')
-    .max(150, 'Too Long!')
-    .required('Required'),
-    job: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-    link: Yup.string()
-    .min(2, 'Too Short!')
-    .max(50, 'Too Long!')
-    .required('Required'),
-});
 
 const initialValues = {
-  name: "Alex",
-  location: "Paris, France",
-  email: "Alexferguson@outlook.com",
-  phone: "01 348 501 2699",
-  paragraph: "I'm a self-taught Graphic Designer and Programmer based in USA with extensive front-end and back-end knowledge. I am currently living in France and pusuing a degree in Web and Digital Project Management.",
-  circle: "Front-end developer  •  Back-end Developer  •  UI/UX •  Web Designer  •  ",
-  job: "Web Developer",
-  link: "https://www.linkedin.com",
-  software: ["Photoshop","Illustrator", "VSCode", "React", "NextJs"],
-  programming: ["HTML", "CSS", "JavaScript", "TypeScript"],
-  softSkills: [
-  "Web Design",
-  "UI/UX",
-  "Creative",
-  "Detail-Oriented",
-  "Hardworking",],
+  name: "",
+  location: "",
+  email: "",
+  phone: "",
+  paragraph: "",
+  circle: "",
+  job: "",
+  link: "",
+  software: [""],
+  programming: [""],
+  softSkills: [""],
   education: [
     {
-      year: "2015-2019",
-      heading: "Iowa State university",
-      subHeading: "Bachelor in CS",
-    },{
-      
-      year: "2020-2021",
-      heading: "Alphabet, Google",
-      subHeading: "Degree in cloud computing",
-    },
-    {
-      year: "2021-2022",
-      heading: "Alphabet, Google",
-      subHeading: "Degree in AI technologies",
+      year: "",
+      heading: "",
+      subHeading: "",
     },
   ],
   experience: [
     {
-      year: "2023-2023",
-      heading: "Google, inc",
-      subHeading: "Full Stack Developer",
+      year: "",
+      heading: "",
+      subHeading: "",
     },
-    {
-      year: "2023-2024",
-      heading: "Twitter",
-      subHeading: "Back-end engineer",
-    }
   ],
 };
 
-const imageUpload = (e:  React.ChangeEvent<HTMLInputElement>) => {
-  const target = e.target as HTMLInputElement;
-  const file: File | null = target.files ? target.files[0] : null;
-  const reader = new FileReader();
-  reader.onloadend = () => {
-    const base64StringUS = reader.result! as string
-    localStorage.setItem("profile-img", base64StringUS);
-    const myImage = localStorage.getItem("profile-img");
-    let bannerImg: HTMLImageElement | null = document.getElementById("tableBanner") as HTMLImageElement;
-    if (bannerImg) {
-      bannerImg.src = '' +  myImage;
-    }
-  };
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-}
 
-const FormResume = () => {
+const Edit2 = () => {
   const router = useRouter();
   return (
     <div className={styles.container}>
     <div className={styles.form}>
-      <h2 className={styles.formHeading}>Resume Builder</h2>
-      <div className={styles.imgSelect}>
-        <input type="file" id="image-input" onChange={imageUpload} />
-        <img alt="no" id="tableBanner" className={styles.uploadImg} />
-      </div>
       <Formik
         initialValues={initialValues}
-        validationSchema={FormSchema}
         onSubmit={async (values) => {
           localStorage.setItem('name', values.name)
           localStorage.setItem('location', values.location)
@@ -134,8 +57,7 @@ const FormResume = () => {
           localStorage.setItem("education", JSON.stringify(values.education));
           localStorage.setItem("experience", JSON.stringify(values.experience));
           router.push('/home')
-        }
-      }
+        }}
       >
         {({ values }) => (
           <Form>
@@ -260,7 +182,7 @@ const FormResume = () => {
               {({ insert, remove, push }) => (
                 <div>
                   {values.software.length > 0 &&
-                    values.software.map((software, index) => (
+                    values.software.map((edu, index) => (
                       <div className={styles.singlerow} key={index}>
                         <div className={styles.singleinputcol}>
                           <label htmlFor={`software.${index}`}>
@@ -268,7 +190,6 @@ const FormResume = () => {
                           </label>
                           <Field
                             name={`software.${index}`}
-                            id="software"
                             placeholder="example: VS Code, Photoshop etc..."
                             type="text"
                           />
@@ -293,7 +214,7 @@ const FormResume = () => {
                     type="button"
                     className={styles.addButton}
                     onClick={() =>
-                      push( '' )
+                      push({ year: "", heading: "", subHeading: "" })
                     }
                   >
                     Add Softwares
@@ -309,7 +230,7 @@ const FormResume = () => {
               {({ insert, remove, push }) => (
                 <div>
                   {values.programming.length > 0 &&
-                    values.programming.map((programming, index) => (
+                    values.programming.map((edu, index) => (
                       <div className={styles.singlerow} key={index}>
                         <div className={styles.singleinputcol}>
                           <label htmlFor={`programming.${index}`}>
@@ -341,7 +262,7 @@ const FormResume = () => {
                     type="button"
                     className={styles.addButton}
                     onClick={() =>
-                      push( '' )
+                      push({ year: "", heading: "", subHeading: "" })
                     }
                   >
                     Add More Languages
@@ -357,7 +278,7 @@ const FormResume = () => {
               {({ insert, remove, push }) => (
                 <div>
                   {values.softSkills.length > 0 &&
-                    values.softSkills.map((softskills, index) => (
+                    values.softSkills.map((edu, index) => (
                       <div className={styles.singlerow} key={index}>
                         <div className={styles.singleinputcol}>
                           <label htmlFor={`softSkills.${index}`}>
@@ -389,7 +310,7 @@ const FormResume = () => {
                     type="button"
                     className={styles.addButton}
                     onClick={() =>
-                      push( '' )
+                      push({ year: "", heading: "", subHeading: "" })
                     }
                   >
                     Add More Skills
@@ -408,7 +329,7 @@ const FormResume = () => {
                     values.education.map((edu, index) => (
                       <div className={styles.row} key={index}>
                         <h4></h4>
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <label htmlFor={`education.${index}.year`}>
                             Year
                           </label>
@@ -424,7 +345,7 @@ const FormResume = () => {
                           />
                         </div>
 
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <label htmlFor={`education.${index}.heading`}>
                             School / Institute
                           </label>
@@ -440,7 +361,7 @@ const FormResume = () => {
                           />
                         </div>
 
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <label htmlFor={`education.${index}.subHeading`}>
                             Degree / Certificate
                           </label>
@@ -456,7 +377,7 @@ const FormResume = () => {
                           />
                         </div>
 
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <button
                             type="button"
                             className={styles.closeButton}
@@ -481,16 +402,16 @@ const FormResume = () => {
             </FieldArray>
 
             <h3 className={styles.heading}>Experience</h3>
-            {/* Field Array for Experience */}
+            {/* Field Array for Education */}
             <FieldArray name="experience">
               
               {({ insert, remove, push }) => (
                 <div>
                   {values.experience.length > 0 &&
-                    values.experience.map((exp, index) => (
+                    values.experience.map((edu, index) => (
                       <div className={styles.row} key={index}>
                         <h4></h4>
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <label htmlFor={`experience.${index}.year`}>
                             Year
                           </label>
@@ -506,7 +427,7 @@ const FormResume = () => {
                           />
                         </div>
 
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <label htmlFor={`experience.${index}.heading`}>
                             Company
                           </label>
@@ -522,7 +443,7 @@ const FormResume = () => {
                           />
                         </div>
 
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <label htmlFor={`experience.${index}.subHeading`}>
                             Responsibilities
                           </label>
@@ -538,7 +459,7 @@ const FormResume = () => {
                           />
                         </div>
 
-                        <div className={styles.rowcol}>
+                        <div className="col">
                           <button
                             type="button"
                             className={styles.closeButton}
@@ -571,4 +492,4 @@ const FormResume = () => {
   );
 };
 
-export default FormResume;
+export default Edit2

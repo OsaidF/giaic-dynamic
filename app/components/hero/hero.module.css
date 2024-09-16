@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     height: 90vh;
-    min-height: 800px;    
+    min-height: 800px;
 }
 
 .hero{
@@ -100,7 +100,7 @@
     overflow-x: hidden;
 }
 .circleImage{
-    width: auto;
+    width: 370px;
     height: 370px;
 }
 .edit{
@@ -109,6 +109,58 @@
     top: 0;
     right: 0;
     height: auto;
+    cursor: pointer;
+}
+
+.form{
+    margin-top: 50px;
+    width: 300px;
+    border-radius: 15px;
+    background-color: var(--primary);
+    font-family: var(--font-urbanist);
+    padding: 15px;
+    font-weight: 800;
+    color: #000;
+    z-index: 1;
+    display: flex;
+    position: absolute;
+    top: -50px;
+    right: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.col{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.col label{
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.col input[type=text]{
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px  20px 10px 20px;
+    border-radius: 50px;
+    width: 250px;
+    border: 2px solid #000;
+    margin: 5px 0px 5px 0px;
+}
+
+.submit{
+    margin-top: 50px;
+    padding: 8px 10px 8px 10px;
+    border: none;
+    width: 100px;
+    border-radius: 50px;
+    font-family: var(--font-urbanist);
+    font-weight: 800;
+    background-color: greenyellow;
+    cursor: pointer;
 }
 @media (max-width: 600px) {
     .container{
