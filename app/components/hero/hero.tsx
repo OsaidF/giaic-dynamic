@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect } from 'react';
 import styles from './hero.module.css'
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import heroImg from '../../public/images/hero/portfolio.png';
 import star from '../../public/images/star.png';
 import locationImg from '../../public/images/hero/location.png';
@@ -14,8 +14,7 @@ import { Formik, Field, Form, ErrorMessage, } from "formik";
 import * as Yup from 'yup';
 
 // GET IMAGE FROM LOCAL STORAGE
-const myImage = localStorage.getItem("profile-img");
-let faceImg = myImage ? myImage : face
+
 
 
 // TEXT RING
@@ -83,6 +82,8 @@ const initialValues = {
 
 
 const Hero = () => {
+  type StaticImageData = { src: string; height: number; width: number; blurDataURL?: string; }
+  const [faceImage, setFaceImage ] = useState<string>(face.src)
   const [locationAdd, setLocationadd] = useState<string>('Paris, France');
   const [email, setEmail] = useState<string>('Alexferguson@outlook.com');
   const [phoneNo, setPhoneNo] = useState<string>('01 348 501 2699');
@@ -108,6 +109,9 @@ const Hero = () => {
     setcircularMessage(circTxt)
     const job = localStorage.getItem('job')!
     setJobTitle(job)
+
+    const myImage = localStorage.getItem("profile-img")? localStorage.getItem("profile-img")! : face.src;
+    setFaceImage(myImage)
   })
 
 
@@ -243,7 +247,7 @@ const Hero = () => {
           </TextRing>
           <div 
           className={styles.circle}>
-            <Image src={faceImg} alt='face' width={370} height={370} className={styles.circleImage} />
+            <Image src={faceImage} alt='face' width={370} height={370} className={styles.circleImage} />
           </div>
       </div>
       

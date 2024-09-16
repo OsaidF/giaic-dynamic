@@ -1,7 +1,6 @@
 'use client'
 import React from 'react';
 import styles from './navbar.module.css'
-import { motion } from "framer-motion";
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
@@ -56,28 +55,6 @@ const Navbar = () => {
 	const toggleModal = () => {
 		setModalIsOpen(!isModalOpen);
 	};
-
-    const container = {
-        hidden: { opacity: 1, scale: 1 },
-        visible: {
-          opacity: 1,
-          scale: 1,
-          transition: {
-            delayChildren: 0.3,
-            staggerChildren: 0.2,
-            delay: 0.7,
-          },
-        },
-      };
-    
-      const item = {
-        hidden: { y: 20, opacity: 0 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { type: "spring", stiffness: 300, damping: 24 },
-        },
-      };
     
   return (
     <div className={styles.container}
@@ -85,37 +62,24 @@ const Navbar = () => {
     >
       {isModalOpen && <Modal onRequestClose={toggleModal} />}
         <div className={styles.navbar}>
-            <motion.div 
-            variants={item}
-            initial={"hidden"}
-            whileInView={"visible"}
-            viewport={{ once: true}}
+            <div 
             className={styles.logo}>
                 Osaid<span>.</span>Dev
-            </motion.div>
-            <motion.div
-            variants={container}
-            initial={"hidden"}
-            whileInView={"visible"}
-            viewport={{ once: true}}
+            </div>
+            <div
             className={styles.links}>
                 <Link href="#first-section">
-                <motion.h4 
-                variants={item}
-                className={styles.link}>About Me</motion.h4>
+                <h4 className={styles.link}>About Me</h4>
                 </Link>
                 <Link href="#first-section">
-                <motion.h4 
-                variants={item} className={styles.link}>Resume</motion.h4>
+                <h4  className={styles.link}>Resume</h4>
                 </Link>
-                <motion.button 
-                variants={item}
-                whileHover={{ scale: 1.1 }}
+                <button
                 onClick={toggleModal}
                 className={styles.button}>
                     Contact Me
-                </motion.button>
-            </motion.div>
+                </button>
+            </div>
         </div>
     </div>
   )
